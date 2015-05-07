@@ -24,7 +24,7 @@
 
 			$qry = $db->query('SELECT employees.first_name, employees.last_name, salaries.salary FROM salaries
 				LEFT JOIN employees ON salaries.emp_no=employees.emp_no WHERE salaries.from_date>=\'1981-01-01\' AND 
-				salaries.to_date<=\'1985-12-31\' ORDER BY salaries.salary DESC LIMIT 1;');
+				salaries.to_date<=\'1985-12-31\' ORDER BY salaries.salary DESC LIMIT 10;');
 
 			echo "<h2> Colleges with the highest percentage of male students </h2>";
 			echo "<table>";
@@ -44,7 +44,7 @@
 			$qry = $db->query('SELECT departments.dept_name, salaries.salary FROM dept_manager
 				LEFT JOIN salaries ON dept_manager.emp_no=salaries.emp_no, departments WHERE 
 				departments.dept_no=dept_manager.dept_no AND salaries.to_date=\'9999-01-01\' ORDER BY
-				salaries.salary DESC LIMIT 1;');
+				salaries.salary DESC LIMIT 10;');
 
 			echo "<h2> Colleges with the largest endowment overall </h2>";
 			echo "<table>";
@@ -61,7 +61,7 @@
 		function __construct(){
 			global $db;
 
-			$qry = $db->query('SELECT DISTINCT dept_name FROM departments;');
+			$qry = $db->query('SELECT *  FROM departments limit 10;');
 
 			echo "<h2> Colleges with the largest enrollment of freshmen </h2>";
 			echo "<table>";
@@ -82,10 +82,11 @@
 				FROM departments, dept_manager LEFT JOIN employees ON dept_manager.emp_no=employees.emp_no WHERE 
 				departments.dept_no=dept_manager.dept_no AND dept_manager.to_date=\'9999-01-01\';');
 
+			echo "<h2> Colleges with the highest revenue from tuition</h2>";
 			echo "<table>";
-			echo "<tr><td><b> Departments </b></td><td><b> ID </b></td><td><b> First Name </b></td><td><b> Last Name </b></td></tr>";
+			echo "<tr><td><b> Institution </b></td><td><b> Revenue from Tuition </b></td></tr>";
 			while($value = $qry->fetch(PDO::FETCH_BOTH)){
-				echo "<tr><td> $value[0] </td><td> $value[1] </td><td> $value[2] </td><td> $value[3] </td></tr>";
+				echo "<tr><td> $value[0] </td><td> $value[1] </td><</tr>";
 			}
 			echo "</table>";
 		}
@@ -99,12 +100,13 @@
 			$qry = $db->query('SELECT employees.first_name, employees.last_name, salaries.salary FROM dept_emp
 				LEFT JOIN dept_manager ON dept_emp.emp_no=dept_manager.emp_no, employees, salaries WHERE
 				dept_emp.emp_no=employees.emp_no AND dept_emp.emp_no=salaries.emp_no AND dept_manager.emp_no IS NULL AND
-				dept_emp.to_date=\'9999-01-01\' ORDER BY salaries.salary DESC LIMIT 1;');
+				dept_emp.to_date=\'9999-01-01\' ORDER BY salaries.salary DESC LIMIT 10;');
 
+			echo "<h2> Colleges with the lowest non-zero tuition revenue </h2>";
 			echo "<table>";
-			echo "<tr><td><b> First Name </b></td><td><b> Last Name </b></td><td><b> Salary </b></td></tr>";
+			echo "<tr><td><b> Institution </b></td><td><b> Revenue from Tuition </b></td></tr>";
 			while($value = $qry->fetch(PDO::FETCH_BOTH)){
-				echo "<tr><td> $value[0] </td><td> $value[1] </td><td> $value[2] </td></tr>";
+				echo "<tr><td> $value[0] </td><td> $value[1] </td></tr>";
 			}
 			echo "</table>";
 		}
