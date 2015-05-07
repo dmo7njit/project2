@@ -34,7 +34,7 @@
 			}
 			echo "</table>";
 		}
-		
+
 	}
 
 	class endowment{
@@ -54,7 +54,7 @@
 			}
 			echo "</table>";
 		}
-		
+
 	}
 
 	class freshmen{
@@ -71,7 +71,6 @@
 			}
 			echo "</table>";
 		}
-		
 	}
 
 	class hituitrev{
@@ -112,6 +111,7 @@
 		}
 
 	}
+
 	class region{
 
 		function __construct(){
@@ -153,7 +153,7 @@
 				}
 			} else {
 
-				echo "<h2> Select a region: </h2>";
+				echo "<h2> Top 10 Colleges by Region for Select Statistics </h2>";
 				$qry = $db->query("SELECT emp_no FROM employees LIMIT 10;");
 
 				echo "<form method=\'post\'>Region<select name=\'emp_no\'>";
@@ -209,48 +209,5 @@
 					$qry->execute();
 
 					echo "<table><tr><td><h3>Employee was updated.</h3></td></tr>";
-					echo "<tr><td><form><input type=\"button\" value=\"Return Home\" onclick=\"window.location.href=\'localhost:8080\'\" /></form></td></tr></table>";
-
-				} else{
-
-					echo "<table>";
-					echo "<form method=\"POST\">";
-					echo "<tr><th>ID</th><td><input readonly required name=\"emp_no\" type=\"text\" value=\"".$_POST['emp_no']."\"></td><tr>";
-					echo "<tr><th>Birthdate</th><td><input required name=\"birthdate\" type=\"date\" value=\"".$_POST['bdate']."\"></td><tr>";
-					echo "<tr><th>First Name</th><td><input required name=\"firstname\" type=\"text\" value=\"".$_POST['fname']."\"></td><tr>";
-					echo "<tr><th>Last Name</th><td><input required name=\"lastname\" type=\"text\" value=\"".$_POST['lname']."\"></td><tr>";
-					echo "<tr><th>Hiredate</th><td><input required name=\"hiredate\" type=\"date\" value=\"".$_POST['hdate']."\"></td><tr>";
-					echo "<tr><th><input type=\"hidden\" name=\"update\" value=\"true\"> <input type=\"hidden\" name=\"ready\" value=\"true\"> <input type=\"submit\" value=\"update\"></th><td></td><tr>";
-					echo "</form>";
-					echo "</table>";
-				}
-			} else {
-
-				
-
-				echo "<h2> Top 10 Colleges by Region for the following statistics: </h2>";
-
-			
-
-				echo "<table id='list1'>";
-				
-
-				while($row = $qry->fetch(PDO::FETCH_BOTH)){
-					
-					echo "<td><form method=\"POST\"><table id='list2'>";
-					echo "<tr><td>$row[0]</td><td>$row[3]</td><td><input type=\"submit\" value=\"select\"></td>
-					<td><input name=\"emp_no\" type=\"hidden\" value=\"$row[0]\"></td> 
-					<td><input name=\"bdate\" type=\"hidden\" value=\"$row[1]\"></td>
-					<td><input name=\"fname\" type=\"hidden\" value=\"$row[2]\"></td>
-					<td><input name=\"lname\" type=\"hidden\" value=\"$row[3]\"></td>
-					<td><input name=\"hdate\" type=\"hidden\" value=\"$row[5]\"></td>
-					<td><input name=\"ready\" type=\"hidden\" value=\"true\"></td></tr></table></form></td>";
-
-
-				}
-				echo "<tr></table>";
-			
-			}
-		}
-	} */
+					echo "<tr><td><form><input type=\"button\" value=\"Return Home\" onclick=\"window.location.href=\'localhost:8080\'\" /> */
 ?>
