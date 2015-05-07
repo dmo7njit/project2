@@ -1,0 +1,39 @@
+body {
+  font-family: Ariel, helvetica, sans-serif;
+  background-color: #DCDCDC;
+}
+
+h2 {
+  border: 3px solid black;
+  padding: 3px;
+  background-color: white;
+  text-align: center;
+}
+
+ a {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 10px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+table {
+  background-color: white;
+  border: 1px solid black;
+  margin-left:auto;
+  margin-right:auto;   
+}
+
+table#list1 {
+  background-color: white;
+  border: 1px solid black;
+  padding: 10px;
+  text-align: left;
+  margin-right:auto;
+}
+
+table#list2{
+  border: none;
+  text-align: left;
+}
