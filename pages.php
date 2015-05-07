@@ -5,12 +5,13 @@
 			global $db;
 
 			$qry = $db->query('SELECT employees.first_name, employees.last_name, salaries.salary FROM salaries
-				LEFT JOIN employees ON salaries.emp_no=employees.emp_no ORDER BY salary DESC LIMIT 1;');
+				LEFT JOIN employees ON salaries.emp_no=employees.emp_no ORDER BY salary DESC LIMIT 10;');
 
+			echo "<h2> Colleges with the highest percentage of female students </h2>";
 			echo "<table>";
-			echo "<tr><td><b> First Name </b></td><td><b> Last Name </b></td><td><b> Salary </b></td></tr>";
+			echo "<tr><td><b> Institution </b></td><td><b> Percentage of Female Students </b></td></tr>";
 			while($value = $qry->fetch(PDO::FETCH_BOTH)){
-				echo "<tr><td> $value[0] </td><td> $value[1] </td><td> $value[2] </td></tr>";
+				echo "<tr><td> $value[0] </td><td> $value[1] </td></tr>";
 			}
 			echo "</table>";
 		}
@@ -25,10 +26,11 @@
 				LEFT JOIN employees ON salaries.emp_no=employees.emp_no WHERE salaries.from_date>=\'1981-01-01\' AND 
 				salaries.to_date<=\'1985-12-31\' ORDER BY salaries.salary DESC LIMIT 1;');
 
+			echo "<h2> Colleges with the highest percentage of male students </h2>";
 			echo "<table>";
-			echo "<tr><td><b> First Name </b></td><td><b> Last Name </b></td><td><b> Salary </b></td></tr>";
+			echo "<tr><td><b> Institutions </b></td><td><b> Percentage of Male Students </b></td></tr>";
 			while($value = $qry->fetch(PDO::FETCH_BOTH)){
-				echo "<tr><td> $value[0] </td><td> $value[1] </td><td> $value[2] </td></tr>";
+				echo "<tr><td> $value[0] </td><td> $value[1] </td></tr>";
 			}
 			echo "</table>";
 		}
@@ -44,8 +46,9 @@
 				departments.dept_no=dept_manager.dept_no AND salaries.to_date=\'9999-01-01\' ORDER BY
 				salaries.salary DESC LIMIT 1;');
 
+			echo "<h2> Colleges with the largest endowment overall </h2>";
 			echo "<table>";
-			echo "<tr><td><b> Department </b></td><td><b> Salary </b></td></tr>";
+			echo "<tr><td><b> Institution </b></td><td><b> Endowment </b></td></tr>";
 			while($value = $qry->fetch(PDO::FETCH_BOTH)){
 				echo "<tr><td> $value[0] </td><td> $value[1] </td></tr>";
 			}
@@ -60,10 +63,11 @@
 
 			$qry = $db->query('SELECT DISTINCT dept_name FROM departments;');
 
+			echo "<h2> Colleges with the largest enrollment of freshmen </h2>";
 			echo "<table>";
-			echo "<tr><td><b> Departments </b></td></tr>";
+			echo "<tr><td><b> Institution </b></td><td><b> Freshmen Enrollment </b></td></tr>";
 			while($value = $qry->fetch(PDO::FETCH_BOTH)){
-				echo "<tr><td> $value[0] </td></tr>";
+				echo "<tr><td> $value[0] </td><td> $value[1] </td></tr>";
 			}
 			echo "</table>";
 		}
@@ -147,12 +151,15 @@
 				}
 			} else {
 
-				$qry = $db->query("SELECT * FROM employees LIMIT 5;");
+				
 
-				echo "<h2> Update Entry </h2>";
+				echo "<h2> Top 10 Colleges by Region for the following statistics: </h2>";
 
-				echo "<table id='list1'><tr>";
 			
+
+				echo "<table id='list1'>";
+				
+
 				while($row = $qry->fetch(PDO::FETCH_BOTH)){
 					
 					echo "<td><form method=\"POST\"><table id='list2'>";

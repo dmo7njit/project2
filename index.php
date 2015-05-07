@@ -21,7 +21,7 @@
 	echo "<h2> David O'Grady IS218 Project 2</h2>";
 	echo "<h2> Please select a question below for more information:</h2>";
 	echo '<table id="list1">';
-	echo '<tr><th><a href="?page=women"> 1. Colleges with the highest percentage of women students</a></th></tr>';
+	echo '<tr><th><a href="?page=women"> 1. Colleges with the highest percentage of female students</a></th></tr>';
 	echo '<tr><th><a href="?page=men"> 2. Colleges with the highest percentage of male students</a></th></tr>';
 	echo '<tr><th><a href="?page=endowment"> 3. Colleges with the largest endowment overall</a></th></tr>';
 	echo '<tr><th><a href="?page=freshmen"> 4. Colleges with the largest enrollment of freshman</a></th></tr>';
