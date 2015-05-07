@@ -21,13 +21,13 @@
 	echo "<h2> David O'Grady IS218 Project 2</h2>";
 	echo "<h2> Please select a question below for more information:</h2>";
 	echo '<table id="list1">';
-	echo '<tr><th><a href="?page=page1"> 1. Colleges with the highest percentage of women students</a></th></tr>';
-	echo '<tr><th><a href="?page=page2"> 2. Colleges with the highest percentage of male students</a></th></tr>';
-	echo '<tr><th><a href="?page=page3"> 3. Colleges with the largest endowment overall</a></th></tr>';
-	echo '<tr><th><a href="?page=page4"> 4. Colleges with the largest enrollment of freshman</a></th></tr>';
-	echo '<tr><th><a href="?page=page5"> 5. Colleges with the lowest non zero tuition revenue</a></th></tr>';
-	echo '<tr><th><a href="?page=page6"> 6. Colleges with the lowest non zero tuition revenue</a></th></tr>';
-	echo '<tr><th><a href="?page=page7"> 7. The top 10 colleges by region for the following statistics:</a><br>
+	echo '<tr><th><a href="?page=women"> 1. Colleges with the highest percentage of women students</a></th></tr>';
+	echo '<tr><th><a href="?page=men"> 2. Colleges with the highest percentage of male students</a></th></tr>';
+	echo '<tr><th><a href="?page=endowment"> 3. Colleges with the largest endowment overall</a></th></tr>';
+	echo '<tr><th><a href="?page=freshmen"> 4. Colleges with the largest enrollment of freshman</a></th></tr>';
+	echo '<tr><th><a href="?page=hituitrev"> 5. Colleges with the highest revenue from tuition</a></th></tr>';
+	echo '<tr><th><a href="?page=lotuitrev"> 6. Colleges with the lowest non zero tuition revenue</a></th></tr>';
+	echo '<tr><th><a href="?page=region"> 7. The top 10 colleges by region for the following statistics:</a><br>
 						<ol id="list3"><li> Endowment </li>
 						    <li> Total Curent Assets </li>
 						    <li> Total Current Liabilities </li>

@@ -1,6 +1,6 @@
 <?php
 
-	class page1{
+	class women{
 		function __construct(){
 			global $db;
 
@@ -17,7 +17,7 @@
 
 	}
 
-	class page2{
+	class men{
 		function __construct(){
 			global $db;
 
@@ -35,7 +35,7 @@
 		
 	}
 
-	class page3{
+	class endowment{
 		function __construct(){
 			global $db;
 
@@ -54,7 +54,7 @@
 		
 	}
 
-	class page4{
+	class freshmen{
 		function __construct(){
 			global $db;
 
@@ -70,7 +70,7 @@
 		
 	}
 
-	class page5{
+	class hituitrev{
 		function __construct(){
 			global $db;
 
@@ -88,7 +88,7 @@
 
 	}
 
-	class page6{
+	class lotuitrev{
 		function __construct(){
 			global $db;
 
@@ -107,115 +107,7 @@
 		
 	}
 
-	class page7{
-		function __construct(){
-			global $db;
-
-			$qry = $db->query('SELECT salaries.emp_no, salaries.salary, employees.first_name, employees.last_name 
-				FROM salaries LEFT JOIN employees ON salaries.emp_no=employees.emp_no WHERE 
-				salaries.to_date=\'9999-01-01\' order by salaries.salary limit 1;');
-
-			echo "<table>";
-			echo "<tr><td><b> ID </b></td><td><b> Salary </b></td><td><b> First Name </b></td><td><b> Last Name </b></td></tr>";
-			while($value = $qry->fetch(PDO::FETCH_BOTH)){
-				echo "<tr><td> $value[0] </td><td> $value[1] </td><td> $value[2] </td><td> $value[3] </td></tr>";
-			}
-			echo "</table>";
-		}
-		
-	}
-
-	class page8{
-		function __construct(){
-			global $db;
-
-			$qry = $db->query('SELECT departments.dept_name, count(dept_emp.emp_no) FROM dept_emp 
-				LEFT JOIN departments ON dept_emp.dept_no=departments.dept_no WHERE to_date=\'9999-01-01\' GROUP BY dept_emp.dept_no;');
-
-			echo "<table>";
-			echo "<tr><td><b> Departments </b></td><td><b> Number of Employees </b></td></tr>";
-			while($value = $qry->fetch(PDO::FETCH_BOTH)){
-				echo "<tr><td> $value[0] </td><td> $value[1] </td></tr>";
-			}
-			echo "</table>";
-		}
-		
-	}
-
-	class page9{
-		function __construct(){
-			global $db;
-
-			$qry = $db->query('SELECT departments.dept_name, sum(salaries.salary) FROM salaries 
-				LEFT JOIN dept_emp ON salaries.emp_no=dept_emp.emp_no, departments WHERE departments.dept_no=dept_emp.dept_no 
-				AND salaries.to_date=\'9999-01-01\' GROUP BY dept_emp.dept_no;');
-
-			echo "<table>";
-			echo "<tr><td><b> Departments </b></td><td><b> Salary Expenditures </b></td></tr>";
-			while($value = $qry->fetch(PDO::FETCH_BOTH)){
-				echo "<tr><td> $value[0] </td><td> $value[1] </td></tr>";
-			}
-			echo "</table>";
-		}
-
-	}
-
-	class page10{
-		function __construct(){
-			global $db;
-
-			$qry = $db->query('SELECT sum(salary) FROM salaries WHERE to_date=\'9999-01-01\';');
-
-			echo "<table>";
-			echo "<tr><td><b> Total Current Expenditures </b></td></tr>";
-			while($value = $qry->fetch(PDO::FETCH_BOTH)){
-				echo "<tr><td> $value[0] </td></tr>";
-			}
-			echo "</table>";
-		}
-		
-	}
-
-	class pageinsert{
-		function __construct(){
-			global $db;
-
-
-			echo "<h2> Insert Entry </h2>";
-			echo "<table>";
-			echo "<form method=\"POST\">";
-			echo "<tr><th>ID</th><td><input required name=\"emp_no\" type=\"text\"></td><tr>";
-			echo "<tr><th>Birthdate</th><td><input required name=\"birth\" type=\"date\"></td><tr>";
-			echo "<tr><th>First Name</th><td><input required name=\"first\" type=\"text\"></td><tr>";
-			echo "<tr><th>Last Name</th><td><input required name=\"last\" type=\"text\"></td><tr>";
-			echo "<tr><th>Gender</th><td><input name=\"gend\" type=\"radio\" value=\"F\" checked> Female <input name=\"gend\" type=\"radio\" value=\"M\"> Male </td><tr>";
-			echo "<tr><th>Hiredate</th><td><input required name=\"hire\" type=\"date\"></td><tr>";
-			echo "<tr><th><input type=\"submit\" value=\"Insert\"> <input type=\"hidden\" name=\"runner\" value=\"true\"></th><td></td><tr>";
-			echo "</form>";
-			echo "</table>";
-
-			if(isset($_POST['runner'])){
-
-				$sql = "INSERT INTO employees(emp_no, birth_date, first_name, last_name, gender, hire_date)
-						VALUES (:eid, :bdate, :fname, :lname, :gen, :hdate)";
-
-				$qry = $db->prepare($sql);
-			
-				$qry->bindParam(':eid', $_POST['emp_no'], PDO::PARAM_STR);
-				$qry->bindParam(':bdate', $_POST['birth'], PDO::PARAM_STR);
-				$qry->bindParam(':fname', $_POST['first'], PDO::PARAM_STR);
-				$qry->bindParam(':lname', $_POST['last'], PDO::PARAM_STR);
-				$qry->bindParam(':gen', $_POST['gend'], PDO::PARAM_STR);
-				$qry->bindParam(':hdate', $_POST['hire'], PDO::PARAM_STR);
-
-				$qry->execute();
-
-				echo "<h3>Employee was inserted.</h3>";
-			}
-		}
-	}
-
-	class pageupdate{
+	class region{
 		function __construct(){
 			global $db;
 
