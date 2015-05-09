@@ -117,97 +117,54 @@
 		function __construct(){
 			global $db;
 
-
 			if(isset($_POST['ready'])){
 
 
-				if(isset($_POST['update'])){
+				echo "<h2> Top 10 Colleges for Select Statistics in the ".$_POST['regionpick']." Region: </h2>";
 
-					$sql = "UPDATE employees SET birth_date = :bdate, first_name = :fname, last_name = :lname, hire_date = :hdate WHERE emp_no= :eid";
+				echo "<table id='list1'>";
 
-					$qry = $db->prepare($sql);
+				echo "<tr> <td>1";
 
-					$qry->bindParam(':eid', $_POST['emp_no'], PDO::PARAM_STR);
-					$qry->bindParam(':bdate', $_POST['birth'], PDO::PARAM_STR);
-					$qry->bindParam(':fname', $_POST['first'], PDO::PARAM_STR);
-					$qry->bindParam(':lname', $_POST['last'], PDO::PARAM_STR);
-					$qry->bindParam(':hdate', $_POST['hire'], PDO::PARAM_STR);
+					$qry = $db->query('SELECT salaries.salary FROM salaries WHERE salaries.emp_no =\'regionpick\' LIMIT 10;');
 
-					$qry->execute();
-
-					echo "<table><tr><td><h3>Employee was updated.</h3></td></tr>";
-					echo "<tr><td><form><input type=\"button\" value=\"Return Home\" onclick=\"window.location.href=\'localhost:8080\'\" /></form></td></tr></table>";
-
-				} else{
-
+					echo "<h2> Colleges with the highest percentage of female students </h2>";
 					echo "<table>";
-					echo "<form method=\"POST\">";
-					echo "<tr><th>ID</th><td><input readonly required name=\"emp_no\" type=\"text\" value=\"".$_POST['emp_no']."\"></td><tr>";
-					echo "<tr><th>Birthdate</th><td><input required name=\"birthdate\" type=\"date\" value=\"".$_POST['bdate']."\"></td><tr>";
-					echo "<tr><th>First Name</th><td><input required name=\"firstname\" type=\"text\" value=\"".$_POST['fname']."\"></td><tr>";
-					echo "<tr><th>Last Name</th><td><input required name=\"lastname\" type=\"text\" value=\"".$_POST['lname']."\"></td><tr>";
-					echo "<tr><th>Hiredate</th><td><input required name=\"hiredate\" type=\"date\" value=\"".$_POST['hdate']."\"></td><tr>";
-					echo "<tr><th><input type=\"hidden\" name=\"update\" value=\"true\"> <input type=\"hidden\" name=\"ready\" value=\"true\"> <input type=\"submit\" value=\"update\"></th><td></td><tr>";
-					echo "</form>";
+					echo "<tr><td><b> Institution </b></td><td><b> Percentage of Female Students </b></td></tr>";
+					while($value = $qry->fetch(PDO::FETCH_BOTH)){
+						echo "<tr><td> $value[0] </td><td> $value[1] </td></tr>";
+					}
 					echo "</table>";
-				}
+
+				echo "</td> <td>2";
+
+
+				echo "</td> <td>3";
+
+
+				echo "</td> </tr>";
+
+				echo "<tr> <td>4</td> <td>5</td> <td></td> </tr>";
+
+				echo "</table>";
+
+				
 			} else {
 
 				echo "<h2> Top 10 Colleges by Region for Select Statistics </h2>";
 				$qry = $db->query("SELECT emp_no FROM employees LIMIT 10;");
 
-				echo "<form method=\'post\'>Region<select name=\'emp_no\'>";
-				while ($row = $qry->fetch(PDO::FETCH_BOTH)){
-					echo "<option value='".$row['emp_no']."'>".$row['emp_no']."</option>";
-				}
-				echo "</select>";
+				echo "<table id='list1'><tr><td>Please select a region to display:</td></tr><tr><td>";
+				echo "<form method=\"POST\">";
 
-
-
-				/*echo "<table id='list1'><tr>";
-
-				while($row = $qry->fetch(PDO::FETCH_BOTH)){
-
-					echo "<td><form method=\"POST\"><table id='list2'>";
-					echo "<tr><td>$row[0]</td><td>$row[3]</td><td><input type=\"submit\" value=\"select\"></td>
-					<td><input name=\"emp_no\" type=\"hidden\" value=\"$row[0]\"></td> 
-					<td><input name=\"bdate\" type=\"hidden\" value=\"$row[1]\"></td>
-					<td><input name=\"fname\" type=\"hidden\" value=\"$row[2]\"></td>
-					<td><input name=\"lname\" type=\"hidden\" value=\"$row[3]\"></td>
-					<td><input name=\"hdate\" type=\"hidden\" value=\"$row[5]\"></td>
-					<td><input name=\"ready\" type=\"hidden\" value=\"true\"></td></tr></table></form></td>";
-
-
-				}
-				echo "<tr></table>"; */
+					echo "Region: <select name=\"regionpick\">";
+					while($row = $qry->fetch(PDO::FETCH_BOTH)){
+						echo "<option value='".$row['emp_no']."'>".$row['emp_no']."</option>";
+					}
+					echo "</select><input type=\"submit\" value=\"select\">
+					<input name=\"ready\" type=\"hidden\" value=\"true\"></form></td></tr></table>";
 
 			}
 		}
 	}
-
-/*
-	class region{
-		function __construct(){
-			global $db;
-
-
-			if(isset($_POST['ready'])){
-
-
-				if(isset($_POST['update'])){
-
-					$sql = "UPDATE employees SET birth_date = :bdate, first_name = :fname, last_name = :lname, hire_date = :hdate WHERE emp_no= :eid";
-
-					$qry = $db->prepare($sql);
-			
-					$qry->bindParam(':eid', $_POST['emp_no'], PDO::PARAM_STR);
-					$qry->bindParam(':bdate', $_POST['birth'], PDO::PARAM_STR);
-					$qry->bindParam(':fname', $_POST['first'], PDO::PARAM_STR);
-					$qry->bindParam(':lname', $_POST['last'], PDO::PARAM_STR);
-					$qry->bindParam(':hdate', $_POST['hire'], PDO::PARAM_STR);
-
-					$qry->execute();
-
-					echo "<table><tr><td><h3>Employee was updated.</h3></td></tr>";
-					echo "<tr><td><form><input type=\"button\" value=\"Return Home\" onclick=\"window.location.href=\'localhost:8080\'\" /> */
 ?>
