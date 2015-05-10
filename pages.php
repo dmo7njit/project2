@@ -196,18 +196,28 @@
 			} else {
 
 				echo "<h2> Top 10 Colleges by Region for Select Statistics </h2>";
-				
+				$qry = $db->query("SELECT OBERG FROM COLLEGE_INFO;");
+
 				echo "<table id='list1'><tr><td>Please select a region to display:</td></tr><tr><td>";
 				echo "<form method=\"POST\">";
 
 					echo "Region: <select name=\"regionpick\">";
-					
-						echo "<option value='0'>"Us Service Schools"</option>";
-						echo "<option value='1'>"`New` England"</option>";
-
-					
+					while($row = $qry->fetch(PDO::FETCH_BOTH)){
+						echo "<option value='".$row['emp_no']."'>".$row['emp_no']."</option>";
+					}
 					echo "</select><input type=\"submit\" value=\"select\">
-					<input name=\"ready\" type=\"hidden\" value=\"true\"></form></td></tr></table>";
+					<input name=\"ready\" type=\"hidden\" value=\"true\"></form></td></tr>";
+					echo "<tr><td><p>Geographic region code <br>
+									0 US Service schools <br>
+									1 Northeast CT ME MA NH RI VT <br>
+									2 Mid East DE DC MD NJ NY PA <br>
+									3 Great Lakes IL IN MI OH WI <br>
+									4 Plains IA KS MN MO NE ND SD <br>
+									5 Southeast AL AR FL GA KY LA MS NC SC TN VA WV <br>
+									6 Southwest AZ NM OK TX <br>
+									7 Rocky Mountains CO ID MT UT WY <br>
+									8 Far West AK CA HI NV OR WA <br>
+									9 Outlying areas AS FM GU MH MP PR PW VI</p></td></tr></table>";
 
 			}
 		}
