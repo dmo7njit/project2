@@ -9,12 +9,13 @@
 	error_reporting(-1);
 	ini_set('display_errors','On');
 
-	$db = new PDO('mysql:host=localhost;dbname=employees;charset=utf8','root','jared1harry',array(PDO::ATTR_EMULATE_PREPARES => false, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+	$db = new PDO('mysql:host=localhost;dbname=colleges;charset=utf8','root','jared1harry',array(PDO::ATTR_EMULATE_PREPARES => false, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
 	include 'pages.php';
 
 	if(isset($_GET['page'])){
 		$qry = new $_GET['page'];
+		
 	} else {
 
 	echo "<h1>Integrated Post Secondary Educational Data System</h1>";
