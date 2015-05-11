@@ -13,6 +13,10 @@
 
 	include 'pages.php';
 
+	$qry = $db->query('select distinct obereg from college_info order by obereg;');
+	while($value = $qry->fetch(PDO::FETCH_BOTH)){
+		echo "$value[0]";	}
+
 	if(isset($_GET['page'])){
 		$qry = new $_GET['page'];
 		

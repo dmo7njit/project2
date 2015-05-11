@@ -4,8 +4,8 @@
 		function __construct(){
 			global $db;
 
-			$qry = $db->query('SELECT INSTNM, (EFTOTLW/EFTOTLT) FROM COLLEGE_INFO LEFT JOIN ENROLLMENT_INFO 
-				ON COLLEGE_INFO.UNITID = ENROLLMENT_INFO.UNITID ORDER BY (EFTOTLW/EFTOTLT) DESC LIMIT 10;');
+			$qry = $db->query('SELECT INSTNM, (EFTOTLW/EFTOTLT) FROM college_info LEFT JOIN enrollment_info 
+				ON college_info.UNITID = enrollment_info.UNITID ORDER BY (EFTOTLW/EFTOTLT) DESC LIMIT 10;');
 
 			echo "<h2> Colleges with the highest percentage of female students </h2>";
 			echo "<table>";
@@ -22,8 +22,8 @@
 		function __construct(){
 			global $db;
 
-			$qry = $db->query('SELECT INSTNM, (EFTOTLM/EFTOTLT) FROM COLLEGE_INFO LEFT JOIN ENROLLMENT_INFO 
-				ON COLLEGE_INFO.UNITID = ENROLLMENT_INFO.UNITID ORDER BY (EFTOTLM/EFTOTLT) DESC LIMIT 10;');
+			$qry = $db->query('SELECT INSTNM, (EFTOTLM/EFTOTLT) FROM college_info LEFT JOIN enrollment_info 
+				ON college_info.UNITID = enrollment_info.UNITID ORDER BY (EFTOTLM/EFTOTLT) DESC LIMIT 10;');
 
 			echo "<h2> Colleges with the highest percentage of male students </h2>";
 			echo "<table>";
@@ -40,8 +40,8 @@
 		function __construct(){
 			global $db;
 
-			$qry = $db->query('SELECT INSTNM, F1H02 FROM COLLEGE_INFO LEFT JOIN FINANCES_INFO 
-				ON COLLEGE_INFO.UNITID = FINANCES_INFO.UNITID ORDER BY F1H02 DESC LIMIT 10;');
+			$qry = $db->query('SELECT INSTNM, F1H02 FROM college_info LEFT JOIN finances_info 
+				ON college_info.UNITID = finances_info.UNITID ORDER BY F1H02 DESC LIMIT 10;');
 
 			echo "<h2> Colleges with the largest endowment overall </h2>";
 			echo "<table>";
@@ -58,8 +58,8 @@
 		function __construct(){
 			global $db;
 
-			$qry = $db->query('SELECT INSTNM, EFTOTLT FROM COLLEGE_INFO LEFT JOIN ENROLLMENT_INFO
-				ON COLLEGE_INFO.UNITID = ENROLLMENT_INFO.UNITID ORDER BY EFTOTLT DESC LIMIT 10;');
+			$qry = $db->query('SELECT INSTNM, EFTOTLT FROM college_info LEFT JOIN enrollment_info
+				ON college_info.UNITID = enrollment_info.UNITID ORDER BY EFTOTLT DESC LIMIT 10;');
 
 			echo "<h2> Colleges with the largest enrollment of freshmen </h2>";
 			echo "<table>";
@@ -75,8 +75,8 @@
 		function __construct(){
 			global $db;
 
-			$qry = $db->query('SELECT INSTNM, F1B01 FROM COLLEGE_INFO LEFT JOIN FINANCES_INFO
-				ON COLLEGE_INFO.UNITID = FINANCES_INFO.UNITID ORDER BY F1B01 DESC LIMIT 10;');
+			$qry = $db->query('SELECT INSTNM, F1B01 FROM college_info LEFT JOIN finances_info
+				ON college_info.UNITID = finances_info.UNITID ORDER BY F1B01 DESC LIMIT 10;');
 
 			echo "<h2> Colleges with the highest revenue from tuition</h2>";
 			echo "<table>";
@@ -93,8 +93,8 @@
 		function __construct(){
 			global $db;
 
-			$qry = $db->query('SELECT INSTNM, F1B01 FROM COLLEGE_INFO LEFT JOIN FINANCES_INFO
-				ON COLLEGE_INFO.UNITID = FINANCES_INFO.UNITID WHERE F1B01>0 ORDER BY F1B01 ASC LIMIT 10;');
+			$qry = $db->query('SELECT INSTNM, F1B01 FROM college_info LEFT JOIN finances_info
+				ON college_info.UNITID = finances_info.UNITID WHERE F1B01>0 ORDER BY F1B01 ASC LIMIT 10;');
 
 			echo "<h2> Colleges with the lowest non-zero tuition revenue </h2>";
 			echo "<table>";
@@ -115,14 +115,14 @@
 			if(isset($_POST['ready'])){
 
 
-				echo "<h2> Top 10 Colleges for Select Statistics in the ".$_POST['regionpick']." Region: </h2>";
+				echo "<h2> Top 10 Colleges for Select Statistics in Region ".$_POST['regionpick']." : </h2>";
 
 				echo "<table id='list1'>";
 
 				echo "<tr> <td>";
 
-					$qry = $db->query('SELECT INSTNM, F1H02 FROM COLLEGE_INFO LEFT JOIN FINANCES_INFO
-						ON COLLEGE_INFO.UNITID = FINANCES_INFO.UNITID WHERE OBERG = $regionpick ORDER BY F1H02 DESC LIMIT 10;');
+					$qry = $db->query('SELECT INSTNM, F1H02 FROM college_info LEFT JOIN finances_info
+						ON college_info.UNITID = finances_info.UNITID WHERE OBEREG = '.$regionpick.' ORDER BY F1H02 DESC LIMIT 10;');
 
 					echo "<h2> Endowment </h2>";
 					echo "<table>";
@@ -134,8 +134,8 @@
 
 				echo "</td> <td>";
 
-					$qry = $db->query('SELECT INSTNM, F1A01 FROM COLLEGE_INFO LEFT JOIN FINANCES_INFO
-						ON COLLEGE_INFO.UNITID = FINANCES_INFO.UNITID WHERE OBERG = $regionpick ORDER BY F1A01 DESC LIMIT 10;');
+					$qry = $db->query('SELECT INSTNM, F1A01 FROM college_info LEFT JOIN finances_info
+						ON college_info.UNITID = finances_info.UNITID WHERE OBEREG = $regionpick ORDER BY F1A01 DESC LIMIT 10;');
 
 					echo "<h2> Total Current Assets </h2>";
 					echo "<table>";
@@ -147,8 +147,8 @@
 
 				echo "</td> <td>";
 
-					$qry = $db->query('SELECT INSTNM, F1A09 FROM COLLEGE_INFO LEFT JOIN FINANCES_INFO
-						ON COLLEGE_INFO.UNITID = FINANCES_INFO.UNITID WHERE OBERG = $regionpick ORDER BY F1A09 DESC LIMIT 10;');
+					$qry = $db->query('SELECT INSTNM, F1A09 FROM college_info LEFT JOIN finances_info
+						ON college_info.UNITID = finances_info.UNITID WHERE OBEREG = $regionpick ORDER BY F1A09 DESC LIMIT 10;');
 
 					echo "<h2> Total Current Liabilities </h2>";
 					echo "<table>";
@@ -162,9 +162,9 @@
 
 				echo "<tr> <td>";
 
-					$qry = $db->query('SELECT INSTNM, (F1B01/EFTOTLT) FROM COLLEGE_INFO, ENROLLMENT_INFO, FINANCES_INFO
-						WHERE COLLEGE_INFO.UNITID = ENROLLMENT_INFO.UNITID AND COLLEGE_INFO.UNITID = FINANCES_INFO.UNITID
-						AND OBERG = $regionpick AND F1B01 > 0 ORDER BY (F1B01/EFTOTLT) LIMIT 10;');
+					$qry = $db->query('SELECT INSTNM, (F1B01/EFTOTLT) FROM college_info, enrollment_info, finances_info
+						WHERE college_info.UNITID = enrollment_info.UNITID AND college_info.UNITID = finances_info.UNITID
+						AND OBEREG = $regionpick AND F1B01 > 0 ORDER BY (F1B01/EFTOTLT) LIMIT 10;');
 
 					echo "<h2> Lowest Non-Zero Tuition </h2>";
 					echo "<table>";
@@ -176,13 +176,13 @@
 
 				echo "</td> <td>5"; 
 
-					$qry = $db->query('SELECT INSTNM, (F1B01/EFTOTLT) FROM COLLEGE_INFO, ENROLLMENT_INFO, FINANCES_INFO
-						WHERE COLLEGE_INFO.UNITID = ENROLLMENT_INFO.UNITID AND COLLEGE_INFO.UNITID = FINANCES_INFO.UNITID
-						AND OBERG = $regionpick ORDER BY (F1B01/EFTOTLT) DESC LIMIT 10;');
+					$qry = $db->query('SELECT INSTNM, (F1B01/EFTOTLT) FROM college_info, enrollment_info, finances_info
+						WHERE college_info.UNITID = enrollment_info.UNITID AND college_info.UNITID = finances_info.UNITID
+						AND OBEREG = $regionpick ORDER BY (F1B01/EFTOTLT) DESC LIMIT 10;');
 
 					echo "<h2> Highest Tuition </h2>";
 					echo "<table>";
-					echo "<tr><td><b> Institution </b></td><td><b> Percentage of Female Students </b></td></tr>";
+					echo "<tr><td><b> Institution </b></td><td><b> Tuition </b></td></tr>";
 					while($value = $qry->fetch(PDO::FETCH_BOTH)){
 						echo "<tr><td> $value[0] </td><td> $value[1] </td></tr>";
 					}
@@ -196,28 +196,28 @@
 			} else {
 
 				echo "<h2> Top 10 Colleges by Region for Select Statistics </h2>";
-				$qry = $db->query("SELECT OBERG FROM COLLEGE_INFO;");
+				$qry = $db->query("SELECT distinct obereg from college_info order by obereg;");
 
 				echo "<table id='list1'><tr><td>Please select a region to display:</td></tr><tr><td>";
 				echo "<form method=\"POST\">";
 
 					echo "Region: <select name=\"regionpick\">";
 					while($row = $qry->fetch(PDO::FETCH_BOTH)){
-						echo "<option value='".$row['emp_no']."'>".$row['emp_no']."</option>";
+						echo "<option value='".$row[0]."'>".$row[0]."</option>";
 					}
-					echo "</select><input type=\"submit\" value=\"select\">
+					echo "</select><input type=\"submit\" value=\"Select\">
 					<input name=\"ready\" type=\"hidden\" value=\"true\"></form></td></tr>";
-					echo "<tr><td><p>Geographic region code <br>
-									0 US Service schools <br>
-									1 Northeast CT ME MA NH RI VT <br>
-									2 Mid East DE DC MD NJ NY PA <br>
-									3 Great Lakes IL IN MI OH WI <br>
-									4 Plains IA KS MN MO NE ND SD <br>
-									5 Southeast AL AR FL GA KY LA MS NC SC TN VA WV <br>
-									6 Southwest AZ NM OK TX <br>
-									7 Rocky Mountains CO ID MT UT WY <br>
-									8 Far West AK CA HI NV OR WA <br>
-									9 Outlying areas AS FM GU MH MP PR PW VI</p></td></tr></table>";
+					echo "<tr><td><p>Geographic Region Codes <br>
+									0 - US Service schools <br>
+									1 - Northeast CT ME MA NH RI VT <br>
+									2 - Mid East DE DC MD NJ NY PA <br>
+									3 - Great Lakes IL IN MI OH WI <br>
+									4 - Plains IA KS MN MO NE ND SD <br>
+									5 - Southeast AL AR FL GA KY LA MS NC SC TN VA WV <br>
+									6 - Southwest AZ NM OK TX <br>
+									7 - Rocky Mountains CO ID MT UT WY <br>
+									8 - Far West AK CA HI NV OR WA <br>
+									9 - Outlying areas AS FM GU MH MP PR PW VI</p></td></tr></table>";
 
 			}
 		}
