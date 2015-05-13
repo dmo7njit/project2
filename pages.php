@@ -4,8 +4,8 @@
 		function __construct(){
 			global $db;
 
-			$qry = $db->query('SELECT INSTNM, (EFTOTLW/EFTOTLT) FROM college_info LEFT JOIN enrollment_info 
-				ON college_info.UNITID = enrollment_info.UNITID ORDER BY (EFTOTLW/EFTOTLT) DESC LIMIT 10;');
+			$qry = $db->query('SELECT distinct INSTNM, round(((EFTOTLW/EFTOTLT)*100),2) FROM college_info, enrollment_info 
+				where college_info.UNITID = enrollment_info.UNITID and EFALEVEL = 1 ORDER BY (EFTOTLW/EFTOTLT) DESC LIMIT 10;');
 
 			echo "<h2> Colleges with the highest percentage of female students </h2>";
 			echo "<table>";
@@ -22,8 +22,8 @@
 		function __construct(){
 			global $db;
 
-			$qry = $db->query('SELECT INSTNM, (EFTOTLM/EFTOTLT) FROM college_info LEFT JOIN enrollment_info 
-				ON college_info.UNITID = enrollment_info.UNITID ORDER BY (EFTOTLM/EFTOTLT) DESC LIMIT 10;');
+			$qry = $db->query('SELECT distinct INSTNM, round(((EFTOTLM/EFTOTLT)*100),2) FROM college_info, enrollment_info 
+				WHERE college_info.UNITID = enrollment_info.UNITID AND EFALEVEL = 1 ORDER BY (EFTOTLM/EFTOTLT) DESC LIMIT 10;');
 
 			echo "<h2> Colleges with the highest percentage of male students </h2>";
 			echo "<table>";
@@ -40,8 +40,8 @@
 		function __construct(){
 			global $db;
 
-			$qry = $db->query('SELECT INSTNM, F1H02 FROM college_info LEFT JOIN finances_info 
-				ON college_info.UNITID = finances_info.UNITID ORDER BY F1H02 DESC LIMIT 10;');
+			$qry = $db->query('SELECT distinct INSTNM, F1H02 FROM college_info, finances_info 
+				WHERE college_info.UNITID = finances_info.UNITID ORDER BY F1H02 DESC LIMIT 10;');
 
 			echo "<h2> Colleges with the largest endowment overall </h2>";
 			echo "<table>";
@@ -58,8 +58,8 @@
 		function __construct(){
 			global $db;
 
-			$qry = $db->query('SELECT INSTNM, EFTOTLT FROM college_info LEFT JOIN enrollment_info
-				ON college_info.UNITID = enrollment_info.UNITID ORDER BY EFTOTLT DESC LIMIT 10;');
+			$qry = $db->query('SELECT distinct INSTNM, EFTOTLT FROM college_info, enrollment_info
+				WHERE college_info.UNITID = enrollment_info.UNITID AND EFALEVEL = 4 ORDER BY EFTOTLT DESC LIMIT 10;');
 
 			echo "<h2> Colleges with the largest enrollment of freshmen </h2>";
 			echo "<table>";
@@ -75,8 +75,8 @@
 		function __construct(){
 			global $db;
 
-			$qry = $db->query('SELECT INSTNM, F1B01 FROM college_info LEFT JOIN finances_info
-				ON college_info.UNITID = finances_info.UNITID ORDER BY F1B01 DESC LIMIT 10;');
+			$qry = $db->query('SELECT distinct INSTNM, F1B01 FROM college_info, finances_info
+				WHERE college_info.UNITID = finances_info.UNITID ORDER BY F1B01 DESC LIMIT 10;');
 
 			echo "<h2> Colleges with the highest revenue from tuition</h2>";
 			echo "<table>";
@@ -93,8 +93,8 @@
 		function __construct(){
 			global $db;
 
-			$qry = $db->query('SELECT INSTNM, F1B01 FROM college_info LEFT JOIN finances_info
-				ON college_info.UNITID = finances_info.UNITID WHERE F1B01>0 ORDER BY F1B01 ASC LIMIT 10;');
+			$qry = $db->query('SELECT distinct INSTNM, F1B01 FROM college_info, finances_info
+				WHERE college_info.UNITID = finances_info.UNITID AND F1B01>0 ORDER BY F1B01 ASC LIMIT 10;');
 
 			echo "<h2> Colleges with the lowest non-zero tuition revenue </h2>";
 			echo "<table>";
@@ -112,17 +112,16 @@
 		function __construct(){
 			global $db;
 
-			if(isset($_POST['ready'])){
+			if(isset($_REQUEST['ready'])){
 
-
-				echo "<h2> Top 10 Colleges for Select Statistics in Region ".$_POST['regionpick']." : </h2>";
+				echo "<h2> Top 10 Colleges for Select Statistics in Region ".$_REQUEST['regionpick']." : </h2>";
 
 				echo "<table id='list1'>";
 
 				echo "<tr> <td>";
 
-					$qry = $db->query('SELECT INSTNM, F1H02 FROM college_info LEFT JOIN finances_info
-						ON college_info.UNITID = finances_info.UNITID WHERE OBEREG = '.$regionpick.' ORDER BY F1H02 DESC LIMIT 10;');
+					$qry = $db->query("SELECT distinct INSTNM, F1H02 FROM college_info, finances_info where college_info.UNITID = finances_info.UNITID
+						AND OBEREG = " . $_POST['regionpick'] . " ORDER BY F1H02 DESC LIMIT 10;");
 
 					echo "<h2> Endowment </h2>";
 					echo "<table>";
@@ -134,8 +133,8 @@
 
 				echo "</td> <td>";
 
-					$qry = $db->query('SELECT INSTNM, F1A01 FROM college_info LEFT JOIN finances_info
-						ON college_info.UNITID = finances_info.UNITID WHERE OBEREG = $regionpick ORDER BY F1A01 DESC LIMIT 10;');
+					$qry = $db->query("SELECT distinct INSTNM, F1A01 FROM college_info LEFT JOIN finances_info
+						ON college_info.UNITID = finances_info.UNITID WHERE OBEREG = " . $_POST['regionpick'] . " ORDER BY F1A01 DESC LIMIT 10;");
 
 					echo "<h2> Total Current Assets </h2>";
 					echo "<table>";
@@ -147,8 +146,8 @@
 
 				echo "</td> <td>";
 
-					$qry = $db->query('SELECT INSTNM, F1A09 FROM college_info LEFT JOIN finances_info
-						ON college_info.UNITID = finances_info.UNITID WHERE OBEREG = $regionpick ORDER BY F1A09 DESC LIMIT 10;');
+					$qry = $db->query("SELECT distinct INSTNM, F1A09 FROM college_info LEFT JOIN finances_info
+						ON college_info.UNITID = finances_info.UNITID WHERE OBEREG = " . $_POST['regionpick'] . " ORDER BY F1A09 DESC LIMIT 10;");
 
 					echo "<h2> Total Current Liabilities </h2>";
 					echo "<table>";
@@ -162,9 +161,9 @@
 
 				echo "<tr> <td>";
 
-					$qry = $db->query('SELECT INSTNM, (F1B01/EFTOTLT) FROM college_info, enrollment_info, finances_info
+					$qry = $db->query("SELECT distinct INSTNM, round((F1B01/EFTOTLT),2) FROM college_info, enrollment_info, finances_info
 						WHERE college_info.UNITID = enrollment_info.UNITID AND college_info.UNITID = finances_info.UNITID
-						AND OBEREG = $regionpick AND F1B01 > 0 ORDER BY (F1B01/EFTOTLT) LIMIT 10;');
+						AND OBEREG = " . $_POST['regionpick'] . " AND F1B01 > 0 ORDER BY (F1B01/EFTOTLT) LIMIT 10;");
 
 					echo "<h2> Lowest Non-Zero Tuition </h2>";
 					echo "<table>";
@@ -174,11 +173,11 @@
 					}
 					echo "</table>";
 
-				echo "</td> <td>5"; 
+				echo "</td> <td>"; 
 
-					$qry = $db->query('SELECT INSTNM, (F1B01/EFTOTLT) FROM college_info, enrollment_info, finances_info
+					$qry = $db->query("SELECT distinct INSTNM, round((F1B01/EFTOTLT),2) FROM college_info, enrollment_info, finances_info
 						WHERE college_info.UNITID = enrollment_info.UNITID AND college_info.UNITID = finances_info.UNITID
-						AND OBEREG = $regionpick ORDER BY (F1B01/EFTOTLT) DESC LIMIT 10;');
+						AND OBEREG = " . $_POST['regionpick'] . " ORDER BY (F1B01/EFTOTLT) DESC LIMIT 10;");
 
 					echo "<h2> Highest Tuition </h2>";
 					echo "<table>";
